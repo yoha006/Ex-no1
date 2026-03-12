@@ -32,54 +32,46 @@ To write and execute Assembly Language Programs to perform arithmetic operations
 
 
 #### Program
-```
+
+```asm
 CODE SEGMENT
 ASSUME CS:CODE, DS:CODE
 
 ORG 1000H
 
 START:
-    MOV AX, CODE
-    MOV DS, AX
+    MOV SI, 1200H      ; Point to first number
 
-    MOV SI,2000H
-    MOV DX,0000H
+    MOV AX, [SI]       ; Load first 16-bit number
+    MOV BX, [SI+02H]   ; Load second 16-bit number
 
-    MOV AX,[SI]
-    MOV BX,[SI+02H]
+    MOV CL, 00H        ; Clear carry flag storage
 
-    ADD AX,BX
+    ADD AX, BX         ; AX = AX + BX
+    JNC L1             ; Jump if no carry
+    INC CL             ; Store carry = 1
 
-    MOV [SI+04H],AX
-    MOV [SI+06H],DX
+L1:
+    MOV [SI+04H], AX   ; Store sum
+    MOV [SI+06H], CL   ; Store carry
 
-    MOV AH,4CH
+    MOV AH, 4CH        ; Exit to DOS
     INT 21H
 
 CODE ENDS
 END START
 ```
-
-
-
 #### Output Table
 
-| MEMORY LOCATION (INPUT) | MEMORY LOCATION (OUTPUT) |
-| ----------------------- | ------------------------ |
-|      1200 : 12          |        1204 : 24         |
-|      1201 : 34          |        1205 : 68         |  
-|      1202 : 12          |        1206 : 00         |
-|      1203 : 34          |                          |  
+<img width="1600" height="1200" alt="image" src="https://github.com/user-attachments/assets/577a7b9c-574f-4ae3-938c-316af8dea721" />
+
 
 #### Manual Calculations
-
- ![WhatsApp Image 2026-02-06 at 8 06 01 PM](https://github.com/user-attachments/assets/7afafc92-65e5-472b-b5fc-db361185480c)
----
-
+<img width="822" height="795" alt="image" src="https://github.com/user-attachments/assets/5cc997d0-05f8-4daf-a962-224637702411" />
 
 ## OUTPUT IMAGE FROM MASM SOFTWARE
-![WhatsApp Image 2026-02-13 at 10 14 37 AM](https://github.com/user-attachments/assets/a3dcdf18-bd7b-407a-b50f-ec847bb978ee)
 
+<img width="638" height="444" alt="image" src="https://github.com/user-attachments/assets/f1cdc964-d3a4-4a34-b0ea-273bec0547bf" />
 
 
 ## 2. SUBTRACTION
@@ -98,7 +90,8 @@ END START
 
 
 #### Program
-```
+
+```asm
 CODE SEGMENT
 ASSUME CS:CODE, DS:CODE
 
@@ -127,26 +120,18 @@ END START
 ```
 
 
-
-
 #### Output Table
+<img width="1200" height="1600" alt="image" src="https://github.com/user-attachments/assets/1c4f64ef-1341-47b3-b380-2249e2060ba5" />
 
-| MEMORY LOCATION (INPUT) | MEMORY LOCATION (OUTPUT) |
-| ----------------------- | ------------------------ |
-|  1200:12                | 1204:00                  |
-|  1201:34                | 1205 : 00                |
-|  1202:12                |                          |
-|1203:34                  |                          |
+
 
 #### Manual Calculations
-
- ![WhatsApp Image 2026-02-06 at 8 06 33 PM](https://github.com/user-attachments/assets/72667867-8f3b-4401-add4-b2001f068213)
----
+<img width="822" height="795" alt="image" src="https://github.com/user-attachments/assets/19563739-5913-4f62-bb74-161abc900193" />
 
 
 ## OUTPUT SCREEN FROM MASM SOFTWARE
 
-![WhatsApp Image 2026-02-13 at 10 15 23 AM](https://github.com/user-attachments/assets/42d2e926-bb8c-4384-8bb1-71982c9d0091)
+<img width="642" height="434" alt="image" src="https://github.com/user-attachments/assets/fb4e4fc3-03e6-4e04-80d7-09a5ffc4810b" />
 
 ## 3. MULTIPLICATION
 
@@ -161,8 +146,11 @@ END START
 
 <img width="569" height="906" alt="image" src="https://github.com/user-attachments/assets/88be88ff-2896-4a88-b73d-84ccffd2fcf9" />
 
+
+
 #### Program
-```
+
+```asm
 CODE SEGMENT
 ASSUME CS:CODE, DS:CODE
 
@@ -188,26 +176,19 @@ START:
 
 CODE ENDS
 END START
-
+ 
 ```
+
 #### Output Table
 
- | MEMORY LOCATION (INPUT) | MEMORY LOCATION (OUTPUT) |
-| ----------------------- | ------------------------ |
-|      1200 : 12          |        1204 : 90         |
-|      1201 : 34          |        1205 : 5A         |  
-|      1202 : 12          |        1206 : 4B         |
-|      1203 : 34          |        1207 : 01         | 
+<img width="1600" height="1200" alt="image" src="https://github.com/user-attachments/assets/951c8a74-f6c1-48ec-8bfe-273a66524fa5" />
 
 #### Manual Calculations
 
- ![WhatsApp Image 2026-02-06 at 8 07 25 PM](https://github.com/user-attachments/assets/d2864d03-321a-45cf-ae69-3a9207d78766)
-
----
-
+<img width="1600" height="1200" alt="image" src="https://github.com/user-attachments/assets/0d051be8-387d-41b8-a2ee-ed47bab22fde" />
 
 ## OUTPUT SCREEN FROM MASM SOFTWARE
-![WhatsApp Image 2026-02-13 at 10 20 57 AM](https://github.com/user-attachments/assets/f5adfb34-94fe-41fe-b235-ff4df65f86f3)
+![WhatsApp Image 2026-02-13 at 10 17 37 AM](https://github.com/user-attachments/assets/9b01b930-0e5c-47b4-9329-08b4fa44b98a)
 
 
 ## 4. DIVISION
@@ -224,7 +205,7 @@ END START
 
 #### Program
 
-```
+```asm
 CODE SEGMENT
 ASSUME CS:CODE, DS:CODE
 
@@ -254,21 +235,15 @@ END START
 ```
 
 #### Output Table
+<img width="1600" height="1200" alt="image" src="https://github.com/user-attachments/assets/3d9b7f94-5a5e-42c5-9b1f-4238fdeac79f" />
 
-| MEMORY LOCATION (INPUT) | MEMORY LOCATION (OUTPUT) |
-| ----------------------- | ------------------------ |
-|      1200 : 12          |        1204 : 01         |
-|      1201 : 34          |        1205 : 00         |  
-|      1202 : 12          |        1206 : 00         |
-|      1203 : 34          |        1207 : 00         | 
+
 
 #### Manual Calculations
+<img width="1600" height="1200" alt="image" src="https://github.com/user-attachments/assets/d5142e1c-1962-4ae4-afe7-992daf224fde" />
 
- ![WhatsApp Image 2026-02-06 at 8 07 25 PM (1)](https://github.com/user-attachments/assets/ce2f426f-5c21-4e66-a1b3-b168d73f19fd)
----
 ## OUTPUT FROM MASM SOFTWARE
-![WhatsApp Image 2026-02-13 at 10 20 57 AM](https://github.com/user-attachments/assets/a1484423-c1b4-441c-a7a1-c909459f6d86)
-
+<img width="696" height="471" alt="image" src="https://github.com/user-attachments/assets/a72cb47e-30b5-4af4-b943-f382868cb183" />
 
 
 
